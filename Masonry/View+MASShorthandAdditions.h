@@ -7,56 +7,57 @@
 //
 
 #import "View+MASAdditions.h"
+#import "MASLayoutConstraintItem.h"
 
 #ifdef MAS_SHORTHAND
 
 /**
- *	Shorthand view additions without the 'mas_' prefixes,
+ *	Shorthand item additions without the 'mas_' prefixes,
  *  only enabled if MAS_SHORTHAND is defined
  */
 @interface MAS_VIEW (MASShorthandAdditions)
 
-@property (nonatomic, strong, readonly) MASViewAttribute *left;
-@property (nonatomic, strong, readonly) MASViewAttribute *top;
-@property (nonatomic, strong, readonly) MASViewAttribute *right;
-@property (nonatomic, strong, readonly) MASViewAttribute *bottom;
-@property (nonatomic, strong, readonly) MASViewAttribute *leading;
-@property (nonatomic, strong, readonly) MASViewAttribute *trailing;
-@property (nonatomic, strong, readonly) MASViewAttribute *width;
-@property (nonatomic, strong, readonly) MASViewAttribute *height;
-@property (nonatomic, strong, readonly) MASViewAttribute *centerX;
-@property (nonatomic, strong, readonly) MASViewAttribute *centerY;
-@property (nonatomic, strong, readonly) MASViewAttribute *baseline;
-@property (nonatomic, strong, readonly) MASViewAttribute *(^attribute)(NSLayoutAttribute attr);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *left;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *top;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *right;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *bottom;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *leading;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *trailing;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *width;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *height;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *centerX;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *centerY;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *baseline;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *(^attribute)(NSLayoutAttribute attr);
 
-@property (nonatomic, strong, readonly) MASViewAttribute *firstBaseline;
-@property (nonatomic, strong, readonly) MASViewAttribute *lastBaseline;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *firstBaseline;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *lastBaseline;
 
 #if TARGET_OS_IPHONE || TARGET_OS_TV
 
-@property (nonatomic, strong, readonly) MASViewAttribute *leftMargin;
-@property (nonatomic, strong, readonly) MASViewAttribute *rightMargin;
-@property (nonatomic, strong, readonly) MASViewAttribute *topMargin;
-@property (nonatomic, strong, readonly) MASViewAttribute *bottomMargin;
-@property (nonatomic, strong, readonly) MASViewAttribute *leadingMargin;
-@property (nonatomic, strong, readonly) MASViewAttribute *trailingMargin;
-@property (nonatomic, strong, readonly) MASViewAttribute *centerXWithinMargins;
-@property (nonatomic, strong, readonly) MASViewAttribute *centerYWithinMargins;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *leftMargin;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *rightMargin;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *topMargin;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *bottomMargin;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *leadingMargin;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *trailingMargin;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *centerXWithinMargins;
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *centerYWithinMargins;
 
 #endif
 
 #if TARGET_OS_IPHONE || TARGET_OS_TV
 
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideLeading NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideTrailing NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideLeft NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideRight NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideTop NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideBottom NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideWidth NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideHeight NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideCenterX NS_AVAILABLE_IOS(11.0);
-@property (nonatomic, strong, readonly) MASViewAttribute *safeAreaLayoutGuideCenterY NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideLeading NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideTrailing NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideLeft NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideRight NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideTop NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideBottom NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideWidth NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideHeight NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideCenterX NS_AVAILABLE_IOS(11.0);
+@property (nonatomic, strong, readonly) MASLayoutItemAttribute *safeAreaLayoutGuideCenterY NS_AVAILABLE_IOS(11.0);
 
 #endif
 
@@ -67,12 +68,12 @@
 @end
 
 #define MAS_ATTR_FORWARD(attr)  \
-- (MASViewAttribute *)attr {    \
+- (MASLayoutItemAttribute *)attr {    \
     return [self mas_##attr];   \
 }
 
 #define MAS_ATTR_FORWARD_AVAILABLE(attr, available)  \
-- (MASViewAttribute *)attr available {    \
+- (MASLayoutItemAttribute *)attr available {    \
     return [self mas_##attr];   \
 }
 
@@ -117,7 +118,7 @@ MAS_ATTR_FORWARD_AVAILABLE(safeAreaLayoutGuideCenterY, NS_AVAILABLE_IOS(11.0));
 
 #endif
 
-- (MASViewAttribute *(^)(NSLayoutAttribute))attribute {
+- (MASLayoutItemAttribute *(^)(NSLayoutAttribute))attribute {
     return [self mas_attribute];
 }
 

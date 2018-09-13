@@ -28,7 +28,7 @@
 - (id)constraint:(MASConstraint *)constraint addConstraintWithLayoutAttribute:(NSLayoutAttribute)layoutAttribute {
     [self.chainedConstraints addObject:constraint];
     
-    MASViewConstraint *viewConstraint = [[MASViewConstraint alloc] initWithFirstViewAttribute:[[MASViewAttribute alloc] initWithView:nil layoutAttribute:layoutAttribute]];
+    MASViewConstraint *viewConstraint = [[MASViewConstraint alloc] initWithFirstViewAttribute:[[MASLayoutItemAttribute alloc] initWithItem:nil layoutAttribute:layoutAttribute]];
     return viewConstraint;
 }
 

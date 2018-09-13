@@ -13,7 +13,7 @@
 
 @interface MASConstraintMaker () <MASConstraintDelegate>
 
-@property (nonatomic, weak) MAS_VIEW *view;
+@property (nonatomic, weak) id<MASLayoutConstraintItem> item;
 @property (nonatomic, strong) NSMutableArray *constraints;
 
 @end
@@ -37,7 +37,7 @@ SpecBegin(MASConstraintMaker) {
     superview = MAS_VIEW.new;
     [superview addSubview:view];
 
-    maker = [[MASConstraintMaker alloc] initWithView:view];
+    maker = [[MASConstraintMaker alloc] initWithItem:view];
 }
 
 - (void)testCreateSingleAttribute {
@@ -46,7 +46,7 @@ SpecBegin(MASConstraintMaker) {
     expect(composite.childConstraints).to.haveCountOf(1);
     
     MASViewConstraint *viewConstraint = composite.childConstraints[0];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeHeight);
 }
 
@@ -57,11 +57,11 @@ SpecBegin(MASConstraintMaker) {
     
     // children are ordered like MASAttribute, so the first is width
     MASViewConstraint *viewConstraint = composite.childConstraints[0];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeWidth);
     
     viewConstraint = composite.childConstraints[1];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeCenterX);
 }
 
@@ -71,11 +71,11 @@ SpecBegin(MASConstraintMaker) {
     expect(composite.childConstraints).to.haveCountOf(2);
 
     MASViewConstraint *viewConstraint = composite.childConstraints[0];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeCenterX);
 
     viewConstraint = composite.childConstraints[1];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeCenterY);
 }
 
@@ -90,22 +90,22 @@ SpecBegin(MASConstraintMaker) {
     
     //left
     viewConstraint = composite.childConstraints[0];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeLeft);
     
     //right
     viewConstraint = composite.childConstraints[1];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeRight);
     
     //top
     viewConstraint = composite.childConstraints[2];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeTop);
 
     //bottom
     viewConstraint = composite.childConstraints[3];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeBottom);
 }
 
@@ -114,11 +114,11 @@ SpecBegin(MASConstraintMaker) {
     expect(composite.childConstraints).to.haveCountOf(2);
 
     MASViewConstraint *viewConstraint = composite.childConstraints[0];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeWidth);
 
     viewConstraint = composite.childConstraints[1];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeHeight);
 }
 
@@ -183,14 +183,14 @@ SpecBegin(MASConstraintMaker) {
     [maker install];
     
     expect(superview.constraints).to.haveCountOf(3);
-    expect([MASViewConstraint installedConstraintsForView:view]).to.haveCountOf(3);
+    expect([MASViewConstraint installedConstraintsForItem:view]).to.haveCountOf(3);
     
     maker.removeExisting = YES;
     maker.height.equalTo(newView).offset(100);
     [maker install];
     
     expect(superview.constraints).to.haveCountOf(1);
-    expect([MASViewConstraint installedConstraintsForView:view]).to.haveCountOf(1);
+    expect([MASViewConstraint installedConstraintsForItem:view]).to.haveCountOf(1);
     NSLayoutConstraint *constraint1 = superview.constraints[0];
     expect(constraint1.constant).to.equal(100);
 }
@@ -220,7 +220,7 @@ SpecBegin(MASConstraintMaker) {
     
     
     MASViewConstraint *viewConstraint = composite.childConstraints[2];
-    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(viewConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(viewConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeLeft);
     expect(viewConstraint.delegate).to.beIdenticalTo(composite);
 }
@@ -240,13 +240,13 @@ SpecBegin(MASConstraintMaker) {
     expect(viewConstraint.delegate).to.beIdenticalTo(composite);
     
     MASViewConstraint *childConstraint = composite.childConstraints[0];
-    expect(childConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(childConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(childConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeWidth);
     expect(childConstraint.delegate).to.beIdenticalTo(composite);
     expect(childConstraint).to.beIdenticalTo(viewConstraint);
     
     childConstraint = composite.childConstraints[1];
-    expect(childConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.view);
+    expect(childConstraint.firstViewAttribute.view).to.beIdenticalTo(maker.item);
     expect(childConstraint.firstViewAttribute.layoutAttribute).to.equal(NSLayoutAttributeHeight);
     expect(childConstraint.delegate).to.beIdenticalTo(composite);
 }

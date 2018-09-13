@@ -36,10 +36,10 @@ SpecBegin(NSArray_MASAdditions)
     expect(constraints).to.haveCountOf(views.count);
     
     for (MASViewConstraint *constraint in constraints) {
-        MASViewAttribute *firstAttribute = [constraint firstViewAttribute];
+        MASLayoutItemAttribute *firstAttribute = [constraint firstViewAttribute];
         expect([views indexOfObject:firstAttribute.view]).toNot.equal(NSNotFound);
         expect(firstAttribute.layoutAttribute).to.equal(NSLayoutAttributeWidth);
-        MASViewAttribute *second = [constraint secondViewAttribute];
+        MASLayoutItemAttribute *second = [constraint secondViewAttribute];
         expect(second.view).to.equal(superView);
         expect(second.layoutAttribute).to.equal(NSLayoutAttributeWidth);
     }
@@ -69,7 +69,7 @@ SpecBegin(NSArray_MASAdditions)
     [superView addSubview:subject2];
     NSArray *views = @[ subject1];
     expect(^{
-        [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10.0 leadSpacing:5.0 tailSpacing:5.0];
+        [views mas_distributeItemsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10.0 leadSpacing:5.0 tailSpacing:5.0];
     }).to.raiseAny();
     
 }
@@ -84,7 +84,7 @@ SpecBegin(NSArray_MASAdditions)
     [superView addSubview:subject2];
     NSArray *views = @[ subject1];
     expect(^{
-        [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:10.0 leadSpacing:5.0 tailSpacing:5.0];
+        [views mas_distributeItemsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:10.0 leadSpacing:5.0 tailSpacing:5.0];
     }).to.raiseAny();
     
 }
@@ -103,18 +103,18 @@ SpecBegin(NSArray_MASAdditions)
     
     NSArray *views = @[ subject1,subject2,subject3 ];
 
-    [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10.0 leadSpacing:5.0 tailSpacing:5.0];
+    [views mas_distributeItemsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:10.0 leadSpacing:5.0 tailSpacing:5.0];
     
     //left view
-    NSArray *arr1 = [MASViewConstraint installedConstraintsForView:subject1];
+    NSArray *arr1 = [MASViewConstraint installedConstraintsForItem:subject1];
     expect(arr1).to.haveCountOf(1);
    
     //middle view
-    NSArray *arr2 = [MASViewConstraint installedConstraintsForView:subject2];
+    NSArray *arr2 = [MASViewConstraint installedConstraintsForItem:subject2];
     expect(arr2).to.haveCountOf(2);
     
     //right view
-    NSArray *arr3 = [MASViewConstraint installedConstraintsForView:subject3];
+    NSArray *arr3 = [MASViewConstraint installedConstraintsForItem:subject3];
     expect(arr3).to.haveCountOf(3);
 }
 
@@ -131,19 +131,19 @@ SpecBegin(NSArray_MASAdditions)
     [superView addSubview:subject3];
     
     NSArray *views = @[ subject1,subject2,subject3 ];
-   
-    [views mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:30.0 leadSpacing:5.0 tailSpacing:5.0];
+
+    [views mas_distributeItemsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:30.0 leadSpacing:5.0 tailSpacing:5.0];
     
     //left view
-    NSArray *arr1 = [MASViewConstraint installedConstraintsForView:subject1];
+    NSArray *arr1 = [MASViewConstraint installedConstraintsForItem:subject1];
     expect(arr1).to.haveCountOf(2);
     
     //middle view
-    NSArray *arr2 = [MASViewConstraint installedConstraintsForView:subject2];
+    NSArray *arr2 = [MASViewConstraint installedConstraintsForItem:subject2];
     expect(arr2).to.haveCountOf(2);
     
     //right view
-    NSArray *arr3 = [MASViewConstraint installedConstraintsForView:subject3];
+    NSArray *arr3 = [MASViewConstraint installedConstraintsForItem:subject3];
     expect(arr3).to.haveCountOf(2);
 }
 

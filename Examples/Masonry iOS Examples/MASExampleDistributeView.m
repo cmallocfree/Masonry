@@ -27,28 +27,28 @@
     unsigned int type  = arc4random()%4;
     switch (type) {
         case 0:
-            [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:5 tailSpacing:5];
+            [arr mas_distributeItemsAlongAxis:MASAxisTypeHorizontal withFixedSpacing:20 leadSpacing:5 tailSpacing:5];
             [arr makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(@60);
                 make.height.equalTo(@60);
             }];
             break;
         case 1:
-            [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedSpacing:20 leadSpacing:5 tailSpacing:5];
+            [arr mas_distributeItemsAlongAxis:MASAxisTypeVertical withFixedSpacing:20 leadSpacing:5 tailSpacing:5];
             [arr makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(@0);
                 make.width.equalTo(@60);
             }];
             break;
         case 2:
-            [arr mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:30 leadSpacing:200 tailSpacing:30];
+            [arr mas_distributeItemsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:30 leadSpacing:200 tailSpacing:30];
             [arr makeConstraints:^(MASConstraintMaker *make) {
                 make.top.equalTo(@60);
                 make.height.equalTo(@60);
             }];
             break;
         case 3:
-            [arr mas_distributeViewsAlongAxis:MASAxisTypeVertical withFixedItemLength:30 leadSpacing:30 tailSpacing:200];
+            [arr mas_distributeItemsAlongAxis:MASAxisTypeVertical withFixedItemLength:30 leadSpacing:30 tailSpacing:200];
             [arr makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(@0);
                 make.width.equalTo(@60);

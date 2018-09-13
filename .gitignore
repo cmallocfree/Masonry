@@ -17,3 +17,15 @@ script/env.sh
 DerivedData/
 
 /Masonry.xcworkspace/xcshareddata/Masonry.xccheckout
+.idea/.name
+.idea/misc.xml
+.idea/modules.xml
+.idea/MyMasonry.iml
+.idea/vcs.xml
+.idea/workspace.xml
+.idea/xcode.xml
+.idea/codeStyles/Project.xml
+.idea/runConfigurations/Masonry_iOS.xml
+.idea/runConfigurations/Masonry_iOS_Examples.xml
+.idea/runConfigurations/Masonry_iOS_Tests.xml
+.idea/runConfigurations/Masonry_OSX.xml

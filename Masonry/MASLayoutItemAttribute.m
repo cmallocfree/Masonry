@@ -6,13 +6,19 @@
 //  Copyright (c) 2013 cloudling. All rights reserved.
 //
 
-#import "MASViewAttribute.h"
+#import "MASLayoutItemAttribute.h"
+#import "MASLayoutConstraintItem.h"
 
-@implementation MASViewAttribute
+@implementation MASLayoutItemAttribute
 
-- (id)initWithView:(MAS_VIEW *)view layoutAttribute:(NSLayoutAttribute)layoutAttribute {
-    self = [self initWithView:view item:view layoutAttribute:layoutAttribute];
-    return self;
+- (id)initWithItem:(id)item layoutAttribute:(NSLayoutAttribute)layoutAttribute {
+    if ([item isKindOfClass:MAS_LAYOUT_GUIDE.class]) {
+        return [self initWithView:[(MAS_LAYOUT_GUIDE *)item owningView] item:item layoutAttribute:layoutAttribute];
+    } else if ([item isKindOfClass:MAS_VIEW.class]) {
+        return [self initWithView:(MAS_VIEW *)item item:(MAS_VIEW *)item layoutAttribute:layoutAttribute];
+    } else { // 比如item为nil
+        return [self initWithView:nil item:nil layoutAttribute:layoutAttribute];
+    }
 }
 
 - (id)initWithView:(MAS_VIEW *)view item:(id)item layoutAttribute:(NSLayoutAttribute)layoutAttribute {
@@ -31,7 +37,7 @@
         || self.layoutAttribute == NSLayoutAttributeHeight;
 }
 
-- (BOOL)isEqual:(MASViewAttribute *)viewAttribute {
+- (BOOL)isEqual:(MASLayoutItemAttribute *)viewAttribute {
     if ([viewAttribute isKindOfClass:self.class]) {
         return self.view == viewAttribute.view
             && self.layoutAttribute == viewAttribute.layoutAttribute;

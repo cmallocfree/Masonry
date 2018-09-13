@@ -24,6 +24,7 @@
 #import "MASExampleAspectFitView.h"
 #import "MASExampleMarginView.h"
 #import "MASExampleDistributeView.h"
+#import "MASExampleMoreLayoutGuideViewController.h"
 
 static NSString * const kMASCellReuseIdentifier = @"kMASCellReuseIdentifier";
 
@@ -70,7 +71,6 @@ static NSString * const kMASCellReuseIdentifier = @"kMASCellReuseIdentifier";
                                               viewClass:MASExampleMarginView.class],
         [[MASExampleViewController alloc] initWithTitle:@"Views Distribute"
                                               viewClass:MASExampleDistributeView.class],
-
     ];
     
     if ([UIViewController instancesRespondToSelector:@selector(topLayoutGuide)])
@@ -78,6 +78,7 @@ static NSString * const kMASCellReuseIdentifier = @"kMASCellReuseIdentifier";
         self.exampleControllers = [self.exampleControllers arrayByAddingObject:[[MASExampleLayoutGuideViewController alloc] init]];
     }
     
+    self.exampleControllers = [self.exampleControllers arrayByAddingObject:[[MASExampleMoreLayoutGuideViewController alloc] init]];
     if ([UIView instancesRespondToSelector:@selector(safeAreaLayoutGuide)])
     {
         self.exampleControllers = [self.exampleControllers arrayByAddingObject:[[MASExampleSafeAreaLayoutGuideViewController alloc] init]];

@@ -8,6 +8,8 @@
 
 #import "NSArray+MASAdditions.h"
 #import "View+MASAdditions.h"
+#import "MASLayoutConstraint.h"
+#import "MASLayoutConstraintItem.h"
 
 @implementation NSArray (MASAdditions)
 
@@ -38,9 +40,9 @@
     return constraints;
 }
 
-- (void)mas_distributeViewsAlongAxis:(MASAxisType)axisType withFixedSpacing:(CGFloat)fixedSpacing leadSpacing:(CGFloat)leadSpacing tailSpacing:(CGFloat)tailSpacing {
+- (void)mas_distributeItemsAlongAxis:(MASAxisType)axisType withFixedSpacing:(CGFloat)fixedSpacing leadSpacing:(CGFloat)leadSpacing tailSpacing:(CGFloat)tailSpacing {
     if (self.count < 2) {
-        NSAssert(self.count>1,@"views to distribute need to bigger than one");
+        NSAssert(self.count>1,@"items to distribute need to bigger than one");
         return;
     }
     
@@ -87,7 +89,7 @@
     }
 }
 
-- (void)mas_distributeViewsAlongAxis:(MASAxisType)axisType withFixedItemLength:(CGFloat)fixedItemLength leadSpacing:(CGFloat)leadSpacing tailSpacing:(CGFloat)tailSpacing {
+- (void)mas_distributeItemsAlongAxis:(MASAxisType)axisType withFixedItemLength:(CGFloat)fixedItemLength leadSpacing:(CGFloat)leadSpacing tailSpacing:(CGFloat)tailSpacing {
     if (self.count < 2) {
         NSAssert(self.count>1,@"views to distribute need to bigger than one");
         return;
@@ -147,15 +149,15 @@
     for (id object in self) {
         if ([object isKindOfClass:[MAS_VIEW class]]) {
             MAS_VIEW *view = (MAS_VIEW *)object;
-            if (previousView) {
-                commonSuperview = [view mas_closestCommonSuperview:commonSuperview];
+            if (previousView) {                
+                commonSuperview = [MASLayoutConstraint mas_closestCommonSuperviewBetween:view and:commonSuperview];
             } else {
                 commonSuperview = view;
             }
             previousView = view;
         }
     }
-    NSAssert(commonSuperview, @"Can't constrain views that do not share a common superview. Make sure that all the views in this array have been added into the same view hierarchy.");
+    NSAssert(commonSuperview, @"Can't constrain items that do not share a common superview. Make sure that all the views in this array have been added into the same view hierarchy.");
     return commonSuperview;
 }
 

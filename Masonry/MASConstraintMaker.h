@@ -40,6 +40,8 @@ typedef NS_OPTIONS(NSInteger, MASAttribute) {
     
 };
 
+@protocol MASLayoutConstraintItem;
+
 /**
  *  Provides factory methods for creating MASConstraints.
  *  Constraints are collected until they are ready to be installed
@@ -120,11 +122,11 @@ typedef NS_OPTIONS(NSInteger, MASAttribute) {
 /**
  *	initialises the maker with a default view
  *
- *	@param	view	any MASConstraint are created with this view as the first item
+ *	@param	item	any MASConstraint are created with this view as the first item
  *
  *	@return	a new MASConstraintMaker
  */
-- (id)initWithView:(MAS_VIEW *)view;
+- (instancetype)initWithItem:(id<MASLayoutConstraintItem>)item;
 
 /**
  *	Calls install method on any MASConstraints which have been created by this maker

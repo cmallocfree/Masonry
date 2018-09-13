@@ -13,14 +13,14 @@
 
 - (NSArray *)mas_makeConstraints:(void(^)(MASConstraintMaker *))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithItem:self];
     block(constraintMaker);
     return [constraintMaker install];
 }
 
 - (NSArray *)mas_updateConstraints:(void(^)(MASConstraintMaker *))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithItem:self];
     constraintMaker.updateExisting = YES;
     block(constraintMaker);
     return [constraintMaker install];
@@ -28,7 +28,7 @@
 
 - (NSArray *)mas_remakeConstraints:(void(^)(MASConstraintMaker *make))block {
     self.translatesAutoresizingMaskIntoConstraints = NO;
-    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithView:self];
+    MASConstraintMaker *constraintMaker = [[MASConstraintMaker alloc] initWithItem:self];
     constraintMaker.removeExisting = YES;
     block(constraintMaker);
     return [constraintMaker install];
@@ -36,140 +36,140 @@
 
 #pragma mark - NSLayoutAttribute properties
 
-- (MASViewAttribute *)mas_left {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeft];
+- (MASLayoutItemAttribute *)mas_left {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeLeft];
 }
 
-- (MASViewAttribute *)mas_top {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTop];
+- (MASLayoutItemAttribute *)mas_top {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeTop];
 }
 
-- (MASViewAttribute *)mas_right {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeRight];
+- (MASLayoutItemAttribute *)mas_right {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeRight];
 }
 
-- (MASViewAttribute *)mas_bottom {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBottom];
+- (MASLayoutItemAttribute *)mas_bottom {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeBottom];
 }
 
-- (MASViewAttribute *)mas_leading {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeading];
+- (MASLayoutItemAttribute *)mas_leading {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeLeading];
 }
 
-- (MASViewAttribute *)mas_trailing {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTrailing];
+- (MASLayoutItemAttribute *)mas_trailing {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeTrailing];
 }
 
-- (MASViewAttribute *)mas_width {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeWidth];
+- (MASLayoutItemAttribute *)mas_width {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeWidth];
 }
 
-- (MASViewAttribute *)mas_height {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeHeight];
+- (MASLayoutItemAttribute *)mas_height {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeHeight];
 }
 
-- (MASViewAttribute *)mas_centerX {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterX];
+- (MASLayoutItemAttribute *)mas_centerX {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeCenterX];
 }
 
-- (MASViewAttribute *)mas_centerY {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterY];
+- (MASLayoutItemAttribute *)mas_centerY {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeCenterY];
 }
 
-- (MASViewAttribute *)mas_baseline {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBaseline];
+- (MASLayoutItemAttribute *)mas_baseline {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeBaseline];
 }
 
-- (MASViewAttribute *(^)(NSLayoutAttribute))mas_attribute
+- (MASLayoutItemAttribute *(^)(NSLayoutAttribute))mas_attribute
 {
     return ^(NSLayoutAttribute attr) {
-        return [[MASViewAttribute alloc] initWithView:self layoutAttribute:attr];
+        return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:attr];
     };
 }
 
-- (MASViewAttribute *)mas_firstBaseline {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeFirstBaseline];
+- (MASLayoutItemAttribute *)mas_firstBaseline {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeFirstBaseline];
 }
-- (MASViewAttribute *)mas_lastBaseline {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLastBaseline];
+- (MASLayoutItemAttribute *)mas_lastBaseline {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeLastBaseline];
 }
 
 #if TARGET_OS_IPHONE || TARGET_OS_TV
 
-- (MASViewAttribute *)mas_leftMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeftMargin];
+- (MASLayoutItemAttribute *)mas_leftMargin {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeLeftMargin];
 }
 
-- (MASViewAttribute *)mas_rightMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeRightMargin];
+- (MASLayoutItemAttribute *)mas_rightMargin {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeRightMargin];
 }
 
-- (MASViewAttribute *)mas_topMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTopMargin];
+- (MASLayoutItemAttribute *)mas_topMargin {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeTopMargin];
 }
 
-- (MASViewAttribute *)mas_bottomMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeBottomMargin];
+- (MASLayoutItemAttribute *)mas_bottomMargin {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeBottomMargin];
 }
 
-- (MASViewAttribute *)mas_leadingMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeLeadingMargin];
+- (MASLayoutItemAttribute *)mas_leadingMargin {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeLeadingMargin];
 }
 
-- (MASViewAttribute *)mas_trailingMargin {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeTrailingMargin];
+- (MASLayoutItemAttribute *)mas_trailingMargin {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeTrailingMargin];
 }
 
-- (MASViewAttribute *)mas_centerXWithinMargins {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterXWithinMargins];
+- (MASLayoutItemAttribute *)mas_centerXWithinMargins {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeCenterXWithinMargins];
 }
 
-- (MASViewAttribute *)mas_centerYWithinMargins {
-    return [[MASViewAttribute alloc] initWithView:self layoutAttribute:NSLayoutAttributeCenterYWithinMargins];
+- (MASLayoutItemAttribute *)mas_centerYWithinMargins {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self layoutAttribute:NSLayoutAttributeCenterYWithinMargins];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuide {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeNotAnAttribute];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuide {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeNotAnAttribute];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideLeading {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeLeading];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideLeading {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeLeading];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideTrailing {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeTrailing];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideTrailing {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeTrailing];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideLeft {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeLeft];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideLeft {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeLeft];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideRight {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeRight];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideRight {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeRight];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideTop {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideTop {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeTop];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideBottom {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideBottom {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideWidth {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeWidth];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideWidth {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeWidth];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideHeight {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeHeight];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideHeight {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeHeight];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideCenterX {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeCenterX];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideCenterX {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeCenterX];
 }
 
-- (MASViewAttribute *)mas_safeAreaLayoutGuideCenterY {
-    return [[MASViewAttribute alloc] initWithView:self item:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeCenterY];
+- (MASLayoutItemAttribute *)mas_safeAreaLayoutGuideCenterY {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.safeAreaLayoutGuide layoutAttribute:NSLayoutAttributeCenterY];
 }
 
 #endif
@@ -182,25 +182,6 @@
 
 - (void)setMas_key:(id)key {
     objc_setAssociatedObject(self, @selector(mas_key), key, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
-}
-
-#pragma mark - heirachy
-
-- (instancetype)mas_closestCommonSuperview:(MAS_VIEW *)view {
-    MAS_VIEW *closestCommonSuperview = nil;
-
-    MAS_VIEW *secondViewSuperview = view;
-    while (!closestCommonSuperview && secondViewSuperview) {
-        MAS_VIEW *firstViewSuperview = self;
-        while (!closestCommonSuperview && firstViewSuperview) {
-            if (secondViewSuperview == firstViewSuperview) {
-                closestCommonSuperview = secondViewSuperview;
-            }
-            firstViewSuperview = firstViewSuperview.superview;
-        }
-        secondViewSuperview = secondViewSuperview.superview;
-    }
-    return closestCommonSuperview;
 }
 
 @end

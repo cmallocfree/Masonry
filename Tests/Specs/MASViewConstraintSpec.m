@@ -53,7 +53,7 @@ SpecBegin(MASViewConstraint) {
 
 
 - (void)testRelationCreateEqualConstraint {
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     MASViewConstraint *newConstraint = (id)constraint.equalTo(secondViewAttribute);
 
     expect(newConstraint).to.beIdenticalTo(constraint);
@@ -62,7 +62,7 @@ SpecBegin(MASViewConstraint) {
 }
 
 - (void)testRelationCreateGreaterThanOrEqualConstraint {
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     MASViewConstraint *newConstraint = (id)constraint.greaterThanOrEqualTo(secondViewAttribute);
 
     expect(newConstraint).to.beIdenticalTo(constraint);
@@ -71,7 +71,7 @@ SpecBegin(MASViewConstraint) {
 }
 
 - (void)testRelationCreateLessThanOrEqualConstraint {
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     MASViewConstraint *newConstraint = (id)constraint.lessThanOrEqualTo(secondViewAttribute);
 
     expect(newConstraint).to.beIdenticalTo(constraint);
@@ -80,7 +80,7 @@ SpecBegin(MASViewConstraint) {
 }
 
 - (void)testRelationNotAllowUpdateOfEqual {
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     constraint.lessThanOrEqualTo(secondViewAttribute);
 
     expect(^{
@@ -89,7 +89,7 @@ SpecBegin(MASViewConstraint) {
 }
 
 - (void)testRelationNotAllowUpdateOfLessThanOrEqual{
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     constraint.equalTo(secondViewAttribute);
 
     expect(^{
@@ -98,7 +98,7 @@ SpecBegin(MASViewConstraint) {
 }
 
 - (void)testRelationNotAllowUpdateOfGreaterThanOrEqual {
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     constraint.greaterThanOrEqualTo(secondViewAttribute);
 
     expect(^{
@@ -453,7 +453,7 @@ SpecBegin(MASViewConstraint) {
 
 
 - (void)testInstallLayoutConstraintOnCommit {
-    MASViewAttribute *secondViewAttribute = otherView.mas_height;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_height;
     constraint.equalTo(secondViewAttribute);
     constraint.multipliedBy(0.5);
     constraint.offset(10);
@@ -506,7 +506,7 @@ SpecBegin(MASViewConstraint) {
 
 
 - (void)testUninstallConstraint {
-    MASViewAttribute *secondViewAttribute = otherView.mas_height;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_height;
     constraint.equalTo(secondViewAttribute);
     [constraint install];
 
@@ -518,7 +518,7 @@ SpecBegin(MASViewConstraint) {
 }
 
 - (void)testAttributeChainingShouldNotHaveRelation {
-    MASViewAttribute *secondViewAttribute = otherView.mas_top;
+    MASLayoutItemAttribute *secondViewAttribute = otherView.mas_top;
     constraint.lessThanOrEqualTo(secondViewAttribute);
     
     expect(^{

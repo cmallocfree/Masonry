@@ -44,8 +44,8 @@
 
     [self.growingButton updateConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.width.equalTo(@(self.buttonSize.width)).priorityLow();
-        make.height.equalTo(@(self.buttonSize.height)).priorityLow();
+        make.width.equalTo(@(self.buttonSize.width)).priorityHigh();
+        make.height.equalTo(@(self.buttonSize.height)).priorityHigh();
         make.width.lessThanOrEqualTo(self);
         make.height.lessThanOrEqualTo(self);
     }];
@@ -55,7 +55,7 @@
 }
 
 - (void)didTapGrowButton:(UIButton *)button {
-    self.buttonSize = CGSizeMake(self.buttonSize.width * 1.3, self.buttonSize.height * 1.3);
+    self.buttonSize = CGSizeMake(self.buttonSize.width * 2.3, self.buttonSize.height * 2.3);
 
     // tell constraints they need updating
     [self setNeedsUpdateConstraints];

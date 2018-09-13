@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00FC4A321B7359D700DCA999 /* MASExampleDistributeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00FC4A311B7359D700DCA999 /* MASExampleDistributeView.m */; };
+		0603EF43214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0603EF42214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.m */; };
 		27A27D461A6CF0C400D34F52 /* MASExampleAspectFitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27A27D451A6CF0C400D34F52 /* MASExampleAspectFitView.m */; };
 		3C02224919D0C4EC00507321 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C02224819D0C4EC00507321 /* Images.xcassets */; };
 		3DB1CAD5184538E200E91FC5 /* MASExampleArrayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3DB1CAD4184538E200E91FC5 /* MASExampleArrayView.m */; };
@@ -39,6 +40,8 @@
 /* Begin PBXFileReference section */
 		00FC4A301B7359D700DCA999 /* MASExampleDistributeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASExampleDistributeView.h; sourceTree = "<group>"; };
 		00FC4A311B7359D700DCA999 /* MASExampleDistributeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASExampleDistributeView.m; sourceTree = "<group>"; };
+		0603EF41214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MASExampleMoreLayoutGuideViewController.h; sourceTree = "<group>"; };
+		0603EF42214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MASExampleMoreLayoutGuideViewController.m; sourceTree = "<group>"; };
 		27A27D441A6CF0C400D34F52 /* MASExampleAspectFitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASExampleAspectFitView.h; sourceTree = "<group>"; };
 		27A27D451A6CF0C400D34F52 /* MASExampleAspectFitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASExampleAspectFitView.m; sourceTree = "<group>"; };
 		321AA59CF7B045B6D503D2E5 /* Pods-Masonry iOS Examples.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Masonry iOS Examples.release.xcconfig"; path = "../Pods/Target Support Files/Pods-Masonry iOS Examples/Pods-Masonry iOS Examples.release.xcconfig"; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				DD653E491843E61500D1EC5A /* MASExampleLayoutGuideViewController.m */,
 				DFBACE571F7B76E30047F15A /* MASExampleSafeAreaLayoutGuideViewController.h */,
 				DFBACE581F7B76E40047F15A /* MASExampleSafeAreaLayoutGuideViewController.m */,
+				0603EF41214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.h */,
+				0603EF42214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -248,7 +253,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = MAS;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Jonas Budelmann";
 			};
 			buildConfigurationList = DD52F222179CAD57005CD195 /* Build configuration list for PBXProject "Masonry iOS Examples" */;
@@ -356,6 +361,7 @@
 				DDF3875C179D648D00178773 /* MASExampleAnimatedView.m in Sources */,
 				DD7CC17617ACE990007A469E /* MASExampleDebuggingView.m in Sources */,
 				4BEB55B61957394E008C862B /* MASExampleRemakeView.m in Sources */,
+				0603EF43214531DA002E1605 /* MASExampleMoreLayoutGuideViewController.m in Sources */,
 				DD9B4D35183CC980002BF408 /* MASExampleScrollView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -385,11 +391,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -432,11 +440,13 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;

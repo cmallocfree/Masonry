@@ -12,6 +12,7 @@
 #import "MASLayoutConstraint.h"
 #import "View+MASAdditions.h"
 #import <objc/runtime.h>
+#import "MASLayoutConstraintItem.h"
 
 @interface MAS_VIEW (MASConstraints)
 
@@ -21,13 +22,34 @@
 
 @implementation MAS_VIEW (MASConstraints)
 
-static char kInstalledConstraintsKey;
+static char kInstalledConstraintsKeyOfView;
 
 - (NSMutableSet *)mas_installedConstraints {
-    NSMutableSet *constraints = objc_getAssociatedObject(self, &kInstalledConstraintsKey);
+    NSMutableSet *constraints = objc_getAssociatedObject(self, &kInstalledConstraintsKeyOfView);
     if (!constraints) {
         constraints = [NSMutableSet set];
-        objc_setAssociatedObject(self, &kInstalledConstraintsKey, constraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        objc_setAssociatedObject(self, &kInstalledConstraintsKeyOfView, constraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    return constraints;
+}
+
+@end
+
+@interface MAS_LAYOUT_GUIDE (MASConstraints)
+
+@property (nonatomic, readonly) NSMutableSet *mas_installedConstraints;
+
+@end
+
+@implementation MAS_LAYOUT_GUIDE (MASConstraints)
+
+static char kInstalledConstraintsKeyOfLayoutGuide;
+
+- (NSMutableSet *)mas_installedConstraints {
+    NSMutableSet *constraints = objc_getAssociatedObject(self, &kInstalledConstraintsKeyOfLayoutGuide);
+    if (!constraints) {
+        constraints = [NSMutableSet set];
+        objc_setAssociatedObject(self, &kInstalledConstraintsKeyOfLayoutGuide, constraints, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     }
     return constraints;
 }
@@ -37,7 +59,7 @@ static char kInstalledConstraintsKey;
 
 @interface MASViewConstraint ()
 
-@property (nonatomic, strong, readwrite) MASViewAttribute *secondViewAttribute;
+@property (nonatomic, strong, readwrite) MASLayoutItemAttribute *secondViewAttribute;
 @property (nonatomic, weak) MAS_VIEW *installedView;
 @property (nonatomic, weak) MASLayoutConstraint *layoutConstraint;
 @property (nonatomic, assign) NSLayoutRelation layoutRelation;
@@ -52,7 +74,7 @@ static char kInstalledConstraintsKey;
 
 @implementation MASViewConstraint
 
-- (id)initWithFirstViewAttribute:(MASViewAttribute *)firstViewAttribute {
+- (id)initWithFirstViewAttribute:(MASLayoutItemAttribute *)firstViewAttribute {
     self = [super init];
     if (!self) return nil;
     
@@ -77,8 +99,8 @@ static char kInstalledConstraintsKey;
 
 #pragma mark - Public
 
-+ (NSArray *)installedConstraintsForView:(MAS_VIEW *)view {
-    return [view.mas_installedConstraints allObjects];
++ (NSArray *)installedConstraintsForItem:(id<MASLayoutConstraintItem>)item {
+    return [item.mas_installedConstraints allObjects];
 }
 
 #pragma mark - Private
@@ -122,12 +144,12 @@ static char kInstalledConstraintsKey;
 - (void)setSecondViewAttribute:(id)secondViewAttribute {
     if ([secondViewAttribute isKindOfClass:NSValue.class]) {
         [self setLayoutConstantWithValue:secondViewAttribute];
-    } else if ([secondViewAttribute isKindOfClass:MAS_VIEW.class]) {
-        _secondViewAttribute = [[MASViewAttribute alloc] initWithView:secondViewAttribute layoutAttribute:self.firstViewAttribute.layoutAttribute];
-    } else if ([secondViewAttribute isKindOfClass:MASViewAttribute.class]) {
-        MASViewAttribute *attr = secondViewAttribute;
+    } else if ([secondViewAttribute conformsToProtocol:@protocol(MASLayoutConstraintItem)]) {
+        _secondViewAttribute = [[MASLayoutItemAttribute alloc] initWithItem:secondViewAttribute layoutAttribute:self.firstViewAttribute.layoutAttribute];
+    } else if ([secondViewAttribute isKindOfClass:MASLayoutItemAttribute.class]) {
+        MASLayoutItemAttribute *attr = secondViewAttribute;
         if (attr.layoutAttribute == NSLayoutAttributeNotAnAttribute) {
-            _secondViewAttribute = [[MASViewAttribute alloc] initWithView:attr.view item:attr.item layoutAttribute:self.firstViewAttribute.layoutAttribute];;
+            _secondViewAttribute = [[MASLayoutItemAttribute alloc] initWithItem:attr.item layoutAttribute:self.firstViewAttribute.layoutAttribute];;
         } else {
             _secondViewAttribute = secondViewAttribute;
         }
@@ -342,7 +364,7 @@ static char kInstalledConstraintsKey;
     layoutConstraint.mas_key = self.mas_key;
     
     if (self.secondViewAttribute.view) {
-        MAS_VIEW *closestCommonSuperview = [self.firstViewAttribute.view mas_closestCommonSuperview:self.secondViewAttribute.view];
+        MAS_VIEW *closestCommonSuperview = [MASLayoutConstraint mas_closestCommonSuperviewBetween:self.firstViewAttribute.item and:self.secondViewAttribute.item];
         NSAssert(closestCommonSuperview,
                  @"couldn't find a common superview for %@ and %@",
                  self.firstViewAttribute.view, self.secondViewAttribute.view);

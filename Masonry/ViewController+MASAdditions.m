@@ -15,24 +15,24 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
-- (MASViewAttribute *)mas_topLayoutGuide {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+- (MASLayoutItemAttribute *)mas_topLayoutGuide {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
 }
-- (MASViewAttribute *)mas_topLayoutGuideTop {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+- (MASLayoutItemAttribute *)mas_topLayoutGuideTop {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.topLayoutGuide layoutAttribute:NSLayoutAttributeTop];
 }
-- (MASViewAttribute *)mas_topLayoutGuideBottom {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+- (MASLayoutItemAttribute *)mas_topLayoutGuideBottom {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.topLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
 }
 
-- (MASViewAttribute *)mas_bottomLayoutGuide {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+- (MASLayoutItemAttribute *)mas_bottomLayoutGuide {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];
 }
-- (MASViewAttribute *)mas_bottomLayoutGuideTop {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];
+- (MASLayoutItemAttribute *)mas_bottomLayoutGuideTop {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeTop];
 }
-- (MASViewAttribute *)mas_bottomLayoutGuideBottom {
-    return [[MASViewAttribute alloc] initWithView:self.view item:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
+- (MASLayoutItemAttribute *)mas_bottomLayoutGuideBottom {
+    return [[MASLayoutItemAttribute alloc] initWithItem:self.bottomLayoutGuide layoutAttribute:NSLayoutAttributeBottom];
 }
 
 #pragma clang diagnostic pop
